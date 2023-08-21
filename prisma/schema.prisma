@@ -1,0 +1,65 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+  // directUrl = env("POSTGRES_URL_NON_POOLING")
+}
+
+model users {
+  id        Int      @id @default(autoincrement())
+  name      String?
+  email     String?  @unique
+  image     String?
+  createdAt DateTime @default(now())
+}
+
+model Customer {
+  id        Int     @id @default(autoincrement())
+  firstName String
+  lastName  String
+  email     String  @unique
+  phone     String?
+  city      String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  operations Operation[]
+}
+
+model Operation {
+  id     Int    @id @default(autoincrement())
+  type   String
+  amount Int
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  customer   Customer @relation(fields: [customerId], references: [id])
+  customerId Int
+
+  claim Claim[]
+}
+
+enum ClaimStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+model Claim {
+  id     Int         @id @default(autoincrement())
+  reason String
+  amount Int
+  status ClaimStatus @default(PENDING)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  operation   Operation @relation(fields: [operationId], references: [id])
+  operationId Int
+}
