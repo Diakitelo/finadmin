@@ -11,6 +11,9 @@ export default async function Operation() {
     include: {
       customer: true,
     },
+    orderBy: {
+      createdAt: 'desc',
+    },
   });
   return (
     <div className="space-y-5">

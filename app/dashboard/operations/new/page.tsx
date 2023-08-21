@@ -79,7 +79,7 @@ export default async function AddOperation() {
         />
 
         <div className="flex gap-5 justify-end text-black items-center">
-          <Link href="/dashboard/customers">Annuler</Link>
+          <Link href="/dashboard/operations">Annuler</Link>
           <SubmitButton title="Ajouter" />
         </div>
       </form>{' '}

@@ -1,9 +1,13 @@
 import prisma from '@/lib/prisma';
 
+export const revalidate = 0;
+
 export default async function Page() {
-  const customerCount = await prisma.customer.count();
-  const operationCount = await prisma.operation.count();
-  const claimCount = await prisma.claim.count();
+  const [customerCount, operationCount, claimCount] = await Promise.all([
+    prisma.customer.count(),
+    prisma.operation.count(),
+    prisma.claim.count(),
+  ]);
 
   return (
     <div className="space-y-5">

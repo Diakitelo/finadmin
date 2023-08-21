@@ -5,7 +5,11 @@ import TableHeader from '@/components/table-header';
 export const revalidate = 0;
 
 export default async function Customer() {
-  const customers = await prisma.customer.findMany();
+  const customers = await prisma.customer.findMany({
+    orderBy: {
+      createdAt: 'desc',
+    },
+  });
   return (
     <div className="space-y-5">
       <div className="flex justify-between items-center">

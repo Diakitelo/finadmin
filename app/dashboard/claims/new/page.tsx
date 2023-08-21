@@ -57,11 +57,11 @@ export default async function AddClaim() {
           </div>
 
           <div className="basis-1/2">
-            <Label id="reason">Saissisez la raison de la réclamation</Label>
+            <Label id="reason">Saisissez la raison de la réclamation</Label>
             <textarea
               id="reason"
               name="reason"
-              placeholder="Saissisez la raison de la réclamation"
+              placeholder="Saisissez la raison de la réclamation"
               rows={5}
               className="block w-full appearance-none rounded-lg border border-gray-200 bg-gray-50 px-3 py-2 text-gray-900 focus:border-2 focus:border-[#31B099] focus:bg-white focus:outline-none focus:ring-[#31B099] sm:text-sm"
               required
@@ -79,7 +79,7 @@ export default async function AddClaim() {
         />
 
         <div className="flex gap-5 justify-end text-black items-center">
-          <Link href="/dashboard/customers">Annuler</Link>
+          <Link href="/dashboard/claims">Annuler</Link>
           <SubmitButton title="Ajouter" />
         </div>
       </form>{' '}

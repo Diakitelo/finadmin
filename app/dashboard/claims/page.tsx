@@ -4,6 +4,7 @@ import prisma from '@/lib/prisma';
 import { z } from 'zod';
 import { revalidatePath } from 'next/cache';
 import { formatDate, formatTime } from '@/utils/formatDate';
+import { formatCurrency } from '@/utils/formatNumber';
 
 export const revalidate = 0;
 
@@ -35,6 +36,9 @@ export default async function Claim() {
           customer: true,
         },
       },
+    },
+    orderBy: {
+      createdAt: 'desc',
     },
   });
 
@@ -77,7 +81,9 @@ export default async function Claim() {
                     {claim.operation.customer.lastName}
                   </td>
                   <td className="text-left py-3 px-5">{claim.operation.id}</td>
-                  <td className="text-left py-3 px-5">{claim.amount}</td>
+                  <td className="text-left py-3 px-5">
+                    {formatCurrency(claim.amount)}
+                  </td>
                   <td className="text-left py-3 px-5">
                     {formatDate(claim.createdAt)} à{' '}
                     {formatTime(claim.createdAt)}
